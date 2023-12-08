@@ -12,10 +12,10 @@ import (
 func TestServersStarted(t *testing.T) {
 	serversCount := 10
 	for i := 0; i < serversCount; i++ {
-		startHttpServer(i, fmt.Sprintf(":808%d", i), fmt.Sprintf("hello from %d", i))
+		startHttpServer(i, fmt.Sprintf(":807%d", i), fmt.Sprintf("hello from %d", i))
 	}
 	for i := 0; i < serversCount; i++ {
-		resp, err := http.Get(fmt.Sprintf("http://localhost:808%d", i))
+		resp, err := http.Get(fmt.Sprintf("http://localhost:807%d", i))
 		assert.NilError(t, err)
 		defer resp.Body.Close()
 		bytes, err := io.ReadAll(resp.Body)

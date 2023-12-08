@@ -45,7 +45,9 @@ func waitForShutdown(servers []*http.Server, duration time.Duration) {
 	for i, s := range servers {
 		go func(idx int, server *http.Server) {
 			log.Printf("Shutdown server %d\n", idx)
-			server.Shutdown(timedContext)
+			if err := server.Shutdown(timedContext); err != nil {
+				log.Println(err)
+			}
 			wg.Done()
 		}(i, s)
 	}
